@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Catégorie</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Description</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for product in products %}
+            <tr>
+                <th scope="row">{{ product.id }}</th>
+                <td>{{ product.nom }}</td>
+                <td>{{ product.categorie.nom | default('<span style=color:red>Aucune catégorie affiliée/span') |upper | raw }}</td>
+                <td>{{ product.prix }}€</td>
+                <td><img src="{{ asset('upload/')~product.photo }}" width="100" alt=""></td>
+
+                <td>{{ product.description }}</td>
+
+                <td><a href="{{ path('editProduct', {'id': product.id}) }}" class="btn btn-info">Modifier</a>
+                    <a href="{{ path('deleteProduct', {'id': product.id}) }}" onclick="return confirm('Êtes-vous sûr?')" class="btn btn-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block title %}
+
+    {{ parent() }}Gestion Product
+
+
+{% endblock %}
+

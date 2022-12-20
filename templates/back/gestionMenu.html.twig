@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Description</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for menu in menus %}
+        <tr>
+            <th scope="row">{{ menu.id }}</th>
+            <td>{{ menu.nom }}</td>
+
+            <td>{{ menu.prix }}€</td>
+
+
+            <td>{{ menu.description }}</td>
+
+            <td><a href="{{ path('editMenu', {'id': menu.id}) }}" class="btn btn-info">Modifier</a>
+                <a href="{{ path('deleteMenu', {'id': menu.id}) }}" onclick="return confirm('Êtes-vous sûr?')" class="btn btn-danger">Supprimer</a>
+            </td>
+        </tr>
+    {% endfor %}
+     </tbody>
+    </table>
+{% endblock %}
+
+{% block title %}
+
+    {{ parent() }} Gestion menu
+
+{% endblock %}
+

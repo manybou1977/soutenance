@@ -1,0 +1,168 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+
+    <div class="col-md-7">
+    <div class="row justify-content-evenly">
+
+        <h2>Nos entrées</h2>
+
+        {% for entree in entrees %}
+            <div class="card col-md-4 m-4 p-0 rounded border-success mb-3" style="max-width: 20rem;">
+                <img height="200" src="{{ asset('upload/')~entree.photo }}" alt="">
+                <div class="card-header ">{{  entree.nom  }}</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{  entree.prix |  number_format(2,',') }}€</h4>
+                    <p class="card-text">{{  entree.description | default('Aucune description pour ce produit')  }}</p>
+                </div>
+                <a href="{{ path('ajoutPanier', {'id': entree.id}) }}" class="btn btn-info">ajouter au panier</a>
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+<div class="row justify-content-evenly">
+
+    <h2>Nos plats</h2>
+
+    {% for plat in plats %}
+        <div class="card col-md-4 m-4 p-0 rounded border-success mb-3" style="max-width: 20rem;">
+            <img height="200" src="{{ asset('upload/')~plat.photo }}" alt="">
+            <div class="card-header ">{{  plat.nom  }}</div>
+            <div class="card-body">
+                <h4 class="card-title">{{  plat.prix |  number_format(2,',')  }}€</h4>
+                <p class="card-text">{{  plat.description | default('Aucune description pour ce produit')  }}</p>
+            </div>
+            <a href="{{ path('ajoutPanier', {'id': plat.id}) }}" class="btn btn-info">ajouter au panier</a>
+        </div>
+
+
+    {% endfor %}
+        </div>
+
+<div class="row justify-content-evenly">
+
+    <h2>Nos desserts</h2>
+
+    {% for dessert in desserts %}
+        <div class="card col-md-4 m-4 p-0 rounded border-success mb-3" style="max-width: 20rem;">
+            <img height="200" src="{{ asset('upload/')~dessert.photo }}" alt="">
+            <div class="card-header ">{{  dessert.nom  }}</div>
+            <div class="card-body">
+                <h4 class="card-title">{{  dessert.prix |  number_format(2,',') }}€</h4>
+                <p class="card-text">{{  dessert.description | default('Aucune description pour ce produit')  }}</p>
+            </div>
+            <a href="{{ path('ajoutPanier', {'id': dessert.id}) }}" class="btn btn-info">ajouter au panier</a>
+        </div>
+
+
+    {% endfor %}
+</div>
+
+    <div class="row justify-content-evenly">
+
+        <h2>Nos boissons</h2>
+
+        {% for boisson in boissons %}
+            <div class="card col-md-4 m-4 p-0 rounded border-success mb-3" style="max-width: 20rem;">
+                <img height="200" src="{{ asset('upload/')~boisson.photo }}" alt="">
+                <div class="card-header ">{{  boisson.nom  }}</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{  boisson.prix |  number_format(2,',') }}€</h4>
+                    <p class="card-text">{{  boisson.description | default('Aucune description pour ce produit')  }}</p>
+                </div>
+                <a href="{{ path('ajoutPanier', {'id': boisson.id}) }}" class="btn btn-info">ajouter au panier</a>
+            </div>
+
+
+        {% endfor %}
+    </div>
+
+        <div class="row justify-content-evenly">
+
+            <h2>Nos grillades</h2>
+
+            {% for grillade in grillades %}
+                <div class="card col-md-4 m-4 p-0 rounded border-success mb-3" style="max-width: 20rem;">
+                    <img height="200" src="{{ asset('upload/')~grillade.photo }}" alt="">
+                    <div class="card-header ">{{  grillade.nom  }}</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{  grillade.prix |  number_format(2,',') }}€</h4>
+                        <p class="card-text">{{  grillade.description | default('Aucune description pour ce produit')  }}</p>
+                    </div>
+                    <a href="{{ path('ajoutPanier', {'id': grillade.id}) }}" class="btn btn-info">ajouter au panier</a>
+                </div>
+
+            {% endfor %}
+        </div>
+
+            <div class="row justify-content-evenly">
+
+                <h2>Nos menus</h2>
+
+                {% for menu in menus %}
+                    <div class="card col-md-4 m-4 p-0 rounded border-success mb-3" style="max-width: 20rem;">
+                        <img height="200" src="{{ asset('css/images/menu')~loop.index~'.jpeg' }}" alt="">
+                        <div class="card-header ">{{  menu.nom  }}</div>
+                        <div class="card-body">
+                            <h4 class="card-title">{{  menu.prix|  number_format(2,',') }}€</h4>
+                            <p class="card-text">{{  menu.description | default('Aucune description pour ce produit')  }}</p>
+                        </div>
+                        {% if menu.nom=='Menu Foula' %}
+                            <a href="{{ path('ajoutMenuPanier', {'id': menu.id, 'param': 'entree', 'idmenu':menu.id}) }}" class="btn btn-info">ajouter au panier</a>
+                        {% endif %}
+                        {% if menu.nom=='Menu Kily' %}
+                            <a href="{{ path('ajoutMenuPanier', {'id': menu.id, 'param': 'plat', 'idmenu':menu.id}) }}" class="btn btn-info">ajouter au panier</a>
+                        {% endif %}
+                        {% if menu.nom=='Menu Sabah' or menu.nom=='Menu Neeya' %}
+                            <a href="{{ path('ajoutMenuPanier', {'id': menu.id, 'param': 'boisson', 'idmenu':menu.id}) }}" class="btn btn-info">ajouter au panier</a>
+                        {% endif %}
+
+                    </div>
+
+
+                {% endfor %}
+            </div>
+    </div>
+        <div class="col-md-5 ">
+
+            <div class="border mt-5 position-fixed top-25 w-25 end-0 me-5 border-dark bg-white p-3 rounded">
+                {% for item in panier %}
+                   <p>{{ item.produit.nom }} <a class="ronded ms-5 me-2 btn btn-info" href="{{ path('retraitPanier', {'id': item.produit.id}) }}">-</a>{{ item.quantite }}
+                       <a href="{{ path('ajoutPanier', {'id': item.produit.id}) }}" class="btn btn-info ms-2 rounded">+</a>    </p>
+
+                {% endfor %}
+                {% for item in panierMenu %}
+                    <h3>{{ item.nom }}    </h3>
+                    {% if item.entree.nom is defined %}
+                    <h6>{{ item.entree.nom }}    </h6>
+                        {% endif %}
+                    {% if item. plat is defined%}
+
+
+                    <h6>{{ item.plat.nom }}    </h6>
+                    {% endif %}
+                    {% if item.dessert  is defined%}
+                        <h6>{{ item.dessert.nom }}    </h6>
+                    {% endif %}
+
+
+                    <h6>{{ item.boisson.nom }}    </h6>
+                    <h6>{{ item.prix }}€    <a class="ronded ms-5 me-2 btn btn-danger" href="{{ path('retraitPanierMenu', {'id': item.id}) }}">-</a></h6>
+
+
+                {% endfor %}
+                <h4>Total: {{ total |  number_format(2,',') }}€</h4>
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
